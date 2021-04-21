@@ -52,3 +52,33 @@ class Solution:
             # else we return the item which is not present in string s
             else:
                 return i
+
+# Method 2 from discussion 44 ms, 14.3 MB
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # first sort both the strings, so that they are in same order
+    	s, t = sorted(s), sorted(t)
+        # loop through string s with index
+    	for i,j in enumerate(s):
+            # check if item of string s is equal to item of string t, return if not same
+    		if j != t[i]: return t[i]
+
+        # else return last element
+    	return t[-1]
+
+# Method 3 from discussion 36 ms, 14.3 MB
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # iterate through the set of string t, removing duplicates
+    	for i in set(t):
+            # if the count of item of string t is not equal to count of item in string s, return item
+    		if s.count(i) != t.count(i): return i
+
+
+# Method 4 from discussion 28 ms, 14.4 MB
+from collections import Counter
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # count the number of items in each string and see the difference
+    	return list(Counter(t) - Counter(s))[0]
